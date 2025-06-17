@@ -1,4 +1,4 @@
-import { registerPlugin } from '@capacitor/core';
+import { registerPlugin } from '@capacitor/plugin';
 
 import type {
   NDEFMessagesTransformable,
@@ -14,7 +14,9 @@ import type {
 const NFCPlug = registerPlugin<NFCPluginBasic>('NFC', {
   web: () => import('./web').then(m => new m.NFCWeb()),
 });
+
 export * from './definitions';
+
 export const NFC: NFCPlugin = {
   isSupported: NFCPlug.isSupported.bind(NFCPlug),
   startScan: NFCPlug.startScan.bind(NFCPlug),

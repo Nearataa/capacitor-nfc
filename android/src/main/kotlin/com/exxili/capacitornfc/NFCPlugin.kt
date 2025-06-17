@@ -74,7 +74,7 @@ class NFCPlugin : Plugin() {
 
     @PluginMethod
     fun isSupported(call: PluginCall) {
-        val adapter = NfcAdapter.getDefaultAdapter(this.activity)
+        val adapter = NfcAdapter.getDefaultAdapter(bridge.activity)
         val ret = JSObject()
         ret.put("supported", adapter != null)
         call.resolve(ret)
@@ -104,19 +104,19 @@ class NFCPlugin : Plugin() {
 
     override fun handleOnPause() {
         super.handleOnPause()
-        getDefaultAdapter(this.activity)?.disableForegroundDispatch(this.activity)
+        getDefaultAdapter(bridge.activity)?.disableForegroundDispatch(bridge.activity)
     }
 
     override fun handleOnResume() {
         super.handleOnResume()
-        if(getDefaultAdapter(this.activity) == null) return;
+        if(getDefaultAdapter(bridge.activity) == null) return;
 
-        val intent = Intent(context, this.activity.javaClass).apply {
+        val intent = Intent(context, bridge.activity.javaClass).apply {
             addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP)
         }
 
         val pendingIntent =
-            PendingIntent.getActivity(this.activity, 0, intent, PendingIntent.FLAG_MUTABLE)
+            PendingIntent.getActivity(bridge.activity, 0, intent, PendingIntent.FLAG_MUTABLE)
 
         val intentFilter: Array<IntentFilter> =
             arrayOf(
@@ -131,8 +131,8 @@ class NFCPlugin : Plugin() {
                 IntentFilter(ACTION_TAG_DISCOVERED)
             )
 
-        getDefaultAdapter(this.activity).enableForegroundDispatch(
-            this.activity,
+        getDefaultAdapter(bridge.activity).enableForegroundDispatch(
+            bridge.activity,
             pendingIntent,
             intentFilter,
             techListsArray

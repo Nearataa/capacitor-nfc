@@ -3,15 +3,7 @@ import Capacitor
 import CoreNFC
 
 @objc(NFCPlugin)
-public class NFCPlugin: CAPPlugin, CAPBridgedPlugin {
-    public let identifier = "NFCPlugin"
-    public let jsName = "NFC"
-    public let pluginMethods: [CAPPluginMethod] = [
-        CAPPluginMethod(name: "isSupported", returnType: CAPPluginReturnPromise),
-        CAPPluginMethod(name: "cancelWriteAndroid", returnType: CAPPluginReturnPromise),
-        CAPPluginMethod(name: "startScan", returnType: CAPPluginReturnPromise),
-        CAPPluginMethod(name: "writeNDEF", returnType: CAPPluginReturnPromise)
-    ]
+public class NFCPlugin: CAPPlugin {
 
     private let reader = NFCReader()
     private let writer = NFCWriter()
@@ -76,16 +68,9 @@ public class NFCPlugin: CAPPlugin, CAPBridgedPlugin {
                 continue
             }
             
-            guard let payloadArray = payload as [NSNumber]? else {
-                print("Skipping record due to missing or invalid 'payload' (expected array of numbers)")
-                continue
-            }
-            
-            var payloadBytes = [UInt8]()
-            for number in payloadArray {
-                payloadBytes.append(number.uint8Value)
-            }
+            let payloadBytes = payload.map { UInt8(truncating: $0) }
             let payloadData = Data(payloadBytes)
+
 
             let ndefRecord = NFCNDEFPayload(
                 format: .nfcWellKnown,
