@@ -1,6 +1,6 @@
 {
-  "name": "@exxili/capacitor-nfc",
-  "version": "0.0.9",
+  "name": "@nearataa/capacitor-nfc",
+  "version": "0.1.0",
   "description": "A Capacitor plugin for reading and writing NFC NDEFtags.",
   "main": "dist/plugin.cjs.js",
   "module": "dist/esm/index.js",
@@ -15,7 +15,7 @@
     "Package.swift",
     "ExxiliCapacitorNfc.podspec"
   ],
-  "author": "Exxili",
+  "author": "Nearataa",
   "license": "MIT",
   "repository": {
     "type": "git",
