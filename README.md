@@ -1,4 +1,6 @@
-# Capacitor NFC Plugin (@exxili/capacitor-nfc)
+# Capacitor NFC Plugin (@Nearataa/capacitor-nfc)
+
+An update from exxili's NFC plugin for capacitor v7.
 
 A Capacitor plugin for reading and writing NFC tags on iOS and Android devices. This plugin allows you to:
 
@@ -41,7 +43,7 @@ A Capacitor plugin for reading and writing NFC tags on iOS and Android devices. 
 Install the plugin using npm:
 
 ```bash
-npm install @exxili/capacitor-nfc
+npm install @Nearataa/capacitor-nfc
 npx cap sync
 ```
 
